@@ -46,6 +46,7 @@ class DataSourceVmwareGuestinfo(DS):
             LOG.info("No vmware-rpctool found (PATH is %s)" % self._paths())
             return False
         try:
+            self.vendordata_raw = self._guestinfo("cloudinit.vendordata")
             self.userdata_raw = self._guestinfo("cloudinit.userdata")
             if self.userdata_raw is None:
                 return False
@@ -164,6 +165,7 @@ def main():
     else:
         print("Didn't find data")
     print("userdata_raw: %r" % s.userdata_raw)
+    print("vendordata_raw: %r" % s.vendordata_raw)
     print("metadata: %r" % s.metadata)
 
 if __name__ == "__main__":

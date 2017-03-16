@@ -48,6 +48,7 @@ def test_just_userdata():
             )
     assert ds.get_data() == True
     assert ds.userdata_raw == "just userdata\n"
+    assert ds.vendordata_raw == None
     assert ds.metadata == {}
 
 
@@ -61,6 +62,7 @@ def test_with_metadata():
             )
     assert ds.get_data() == True
     assert ds.userdata_raw == "with metadata\n"
+    assert ds.vendordata_raw == None
     assert ds.metadata == {'instance-id': "1234"}
     assert ds.get_instance_id() == '1234'
 
@@ -74,6 +76,7 @@ def test_with_ovfEnv():
             )
     assert ds.get_data() == True
     assert ds.userdata_raw == "with ovfEnv\n"
+    assert ds.vendordata_raw == None
     assert ds.metadata == {'instance-id': "5678", 'ip': '192.168.111.1'}
 
 def test_instance_id_from_bios():
@@ -86,6 +89,7 @@ def test_instance_id_from_bios():
                     }
                 )
         assert ds.get_data() == True
+        assert ds.vendordata_raw == None
         assert ds.get_instance_id() == '4221369B-38E5-A461-E1F9-5C5EBEC9A328'
     m.assert_called_once_with('/sys/class/dmi/id/product_uuid', 'r')
 
